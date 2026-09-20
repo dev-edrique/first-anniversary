@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An anniversary note for someone special." />
+    <title>A note for you ♡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/envelope.css" />
+  </head>
+  <body class="min-h-screen overflow-hidden bg-[#f8f3fc] font-['DM_Sans'] text-[#493958]">
+    <main class="relative grid min-h-screen place-items-center overflow-hidden px-5 py-12">
+      <div class="absolute -left-20 top-1/4 h-72 w-72 rounded-full bg-[#eadcf7] blur-3xl"></div><div class="absolute -bottom-24 -right-16 h-80 w-80 rounded-full bg-[#f6dfe9] blur-3xl"></div><div class="absolute left-[12%] top-[14%] text-3xl text-[#b996dd] opacity-70">✦</div><div class="absolute bottom-[17%] right-[13%] text-2xl text-[#b996dd] opacity-60">♡</div>
+      <section class="relative z-10 flex max-w-md flex-col items-center text-center">
+        <p class="mb-3 text-[11px] font-semibold uppercase tracking-[.28em] text-[#966ec1]">A little something for you</p>
+        <h1 class="font-['Cormorant_Garamond'] text-5xl font-semibold leading-none text-[#5e3d80] sm:text-6xl">You’ve got<br /><em class="font-medium">love mail.</em></h1>
+        <p class="mt-5 max-w-xs text-sm leading-6 text-[#493958]/70">A small reminder of how much you mean to me, waiting just inside.</p>
+        <button id="envelopeButton" class="envelope-scene mt-12 cursor-pointer rounded-2xl p-5 outline-none focus-visible:ring-4 focus-visible:ring-[#b996dd]/50" aria-label="Open your anniversary letter">
+          <span class="envelope" aria-hidden="true"><span class="letter"><span class="letter-line wide"></span><span class="letter-line"></span><span class="letter-line short"></span><span class="letter-heart">♡</span></span><span class="envelope-back"></span><span class="envelope-front"></span><span class="envelope-flap"><span class="seal">♡</span></span></span>
+        </button>
+        <p id="tapPrompt" class="mt-5 text-xs font-medium uppercase tracking-[.18em] text-[#78519f]">Tap the envelope to open</p>
+      </section>
+    </main>
+    <script src="js/envelope.js"></script>
+  </body>
 </html>
