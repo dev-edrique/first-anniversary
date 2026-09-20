@@ -1,15 +1,32 @@
 html {
   -webkit-tap-highlight-color: transparent;
 }
+/* The landing screen sizes to the *visible* viewport. 100dvh excludes the mobile
+   URL bar; 100vh is the fallback for browsers without dvh. Only horizontal
+   overflow is hidden (the blurred blobs sit outside the viewport) so the page
+   can still scroll vertically and the envelope is always reachable. */
+.page-body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+.page-main {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-block: 3rem;
+}
+/* Every part of the envelope derives from these two values, so the short-screen
+   media query at the bottom only has to change the pair. */
 .envelope-scene {
   perspective: 1000px;
+  --env-w: min(72vw, 300px);
+  --env-h: max(min(48vw, 200px), 160px);
 }
 .envelope {
   position: relative;
   display: block;
-  width: min(72vw, 300px);
-  height: min(48vw, 200px);
-  min-height: 160px;
+  width: var(--env-w);
+  height: var(--env-h);
   filter: drop-shadow(0 20px 18px rgba(94, 61, 128, 0.18));
 }
 .envelope-back {
@@ -36,18 +53,19 @@ html {
   top: 0;
   width: 0;
   height: 0;
-  border-left: min(36vw, 150px) solid transparent;
-  border-right: min(36vw, 150px) solid transparent;
-  border-top: min(24vw, 100px) solid #e8dcfb;
+  border-left: calc(var(--env-w) / 2) solid transparent;
+  border-right: calc(var(--env-w) / 2) solid transparent;
+  border-top: calc(var(--env-h) / 2) solid #e8dcfb;
   transform-origin: top;
   transform: rotateX(0deg);
   transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
     z-index 0s linear 0.35s;
 }
+/* Positioned against the flap's padding box, which sits at (w/2, h/2). */
 .seal {
   position: absolute;
   left: -18px;
-  top: -88px;
+  top: calc(12px - var(--env-h) / 2);
   display: grid;
   height: 36px;
   width: 36px;
@@ -104,7 +122,45 @@ html {
   transform: rotateX(180deg);
 }
 .envelope-scene.is-opening .letter {
-  transform: translateY(-82px);
+  transform: translateY(calc(var(--env-h) * -0.41));
+}
+/* Short viewports - landscape phones and small handsets - shrink the whole
+   scene so it still fits without scrolling. These need a descendant selector to
+   outrank the Tailwind utilities, because the CDN injects its stylesheet after
+   this file. */
+@media (max-height: 720px) {
+  .page-main {
+    padding-block: 1.5rem;
+  }
+  .page-main h1 {
+    font-size: 2.5rem;
+  }
+  .page-main .envelope-scene {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    --env-w: min(56vw, 232px);
+    --env-h: max(min(37vw, 155px), 124px);
+  }
+  .page-main #tapPrompt {
+    margin-top: 0.75rem;
+  }
+}
+@media (max-height: 480px) {
+  .page-main {
+    padding-block: 1rem;
+  }
+  .page-main h1 {
+    font-size: 1.85rem;
+  }
+  .page-main .envelope-scene {
+    margin-top: 0.75rem;
+    padding: 0.4rem;
+    --env-w: min(40vw, 176px);
+    --env-h: max(min(27vw, 118px), 96px);
+  }
+  .page-main #tapPrompt {
+    margin-top: 0.5rem;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .envelope-flap,
