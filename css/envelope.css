@@ -1,0 +1,114 @@
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+.envelope-scene {
+  perspective: 1000px;
+}
+.envelope {
+  position: relative;
+  display: block;
+  width: min(72vw, 300px);
+  height: min(48vw, 200px);
+  min-height: 160px;
+  filter: drop-shadow(0 20px 18px rgba(94, 61, 128, 0.18));
+}
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #d8c5f2;
+}
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 8px;
+  background: linear-gradient(135deg, transparent 50%, #c5a9e5 50%) left,
+    linear-gradient(225deg, transparent 50%, #b996dd 50%) right;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+}
+.envelope-flap {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-left: min(36vw, 150px) solid transparent;
+  border-right: min(36vw, 150px) solid transparent;
+  border-top: min(24vw, 100px) solid #e8dcfb;
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    z-index 0s linear 0.35s;
+}
+.seal {
+  position: absolute;
+  left: -18px;
+  top: -88px;
+  display: grid;
+  height: 36px;
+  width: 36px;
+  place-items: center;
+  border-radius: 9999px;
+  background: #966ec1;
+  color: white;
+  font-family: Georgia, serif;
+  font-size: 21px;
+  box-shadow: 0 3px 7px rgba(67, 42, 93, 0.18);
+}
+.letter {
+  position: absolute;
+  z-index: 2;
+  left: 8%;
+  bottom: 6%;
+  display: flex;
+  width: 84%;
+  height: 82%;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  border-radius: 5px;
+  background: #fffcf8;
+  padding-top: 28px;
+  box-shadow: 0 1px 5px rgba(67, 42, 93, 0.12);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s;
+}
+.letter-line {
+  height: 4px;
+  width: 58%;
+  border-radius: 9px;
+  background: #e8dcfb;
+}
+.letter-line.wide {
+  width: 70%;
+  margin-bottom: 6px;
+  background: #d8c5f2;
+}
+.letter-line.short {
+  width: 38%;
+}
+.letter-heart {
+  margin-top: 2px;
+  color: #966ec1;
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+.envelope-scene.is-opening {
+  pointer-events: none;
+}
+.envelope-scene.is-opening .envelope-flap {
+  z-index: 1;
+  transform: rotateX(180deg);
+}
+.envelope-scene.is-opening .letter {
+  transform: translateY(-82px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .envelope-flap,
+  .letter {
+    transition-duration: 0.01ms !important;
+  }
+}
